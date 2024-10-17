@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>
-        wiki
+        Wikipedia Parser
     </title>
     <link rel="icon" href="{{ asset('favicon.ico') }}">
 
