@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
-class RuWikiService implements ExternalApiInterface
+class EnWikiService implements ExternalApiInterface
 {
-    private string $endpoint = 'https://ru.wikipedia.org/w/api.php';
+    private string $endpoint = 'https://en.wikipedia.org/w/api.php';
 
     private array $params = [
         'action' => 'query',

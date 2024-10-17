@@ -16,7 +16,7 @@ interface ExternalApiInterface
     public function getResponse(string $query): \Illuminate\Http\Client\Response;
 
     /**
-     * @param \Illuminate\Http\Client\Response $response
+     * @param string $query Тело запроса
      */
-    public function fetchResponse(\Illuminate\Http\Client\Response $response);
+    public function fetchResponse(string $query);
 }
