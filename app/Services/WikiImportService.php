@@ -18,14 +18,19 @@ class WikiImportService
 
     public function import(string $query)
     {
-        $data = null;
+        $errors = [];
         try {
             $data = $this->ruWikiService->fetchResponse($query);
-        } catch (\Exception $exception) {
+        } catch (\Exception $ex) {
+            $errors[] = $ex->getMessage();
             try {
-                $this->enWikiService->fetchResponse($query);
+                $data = $this->enWikiService->fetchResponse($query);
             } catch (\Exception $ex2) {
-                return 111;
+                $errors[] = $ex2->getMessage();
+                return [
+                    'errors' => $errors,
+                    'article' => null,
+                ];
             }
         }
 
@@ -41,7 +46,6 @@ class WikiImportService
                 'url' => $data['url'],
                 'count' => $split['count'],
             ]);
-//        dd($split);
 
         $result = [];
         foreach ($split['words'] as $word => $count) {
@@ -54,7 +58,10 @@ class WikiImportService
 
         $article->words()->attach($result);
 
-//        return $data;
+        return [
+            'errors' => $errors,
+            'article' => $article
+        ];
     }
 
     private function split(string $text)

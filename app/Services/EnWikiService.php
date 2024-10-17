@@ -44,9 +44,8 @@ class EnWikiService implements ExternalApiInterface
 
         $pageID = array_key_first($response['query']['pages']);
 
-        // TODO
         if ($pageID === -1) {
-            throw new \Exception('Статья не найдена');
+            throw new \Exception('Не удалось найти статью на en.wikipedia.org');
         }
 
         $page = $response['query']['pages'][$pageID];
@@ -55,7 +54,7 @@ class EnWikiService implements ExternalApiInterface
         $fullText = $page['extract'];
 
         if (!$fullText) {
-            throw new \Exception('Статья не имеет содержания');
+            throw new \Exception('На en.wikipedia.org статья не имеет содержания');
         }
         $pageURL = $page['fullurl'];
 
