@@ -16,7 +16,9 @@ interface ExternalApiInterface
     public function getResponse(string $query): \Illuminate\Http\Client\Response;
 
     /**
+     * Метод для извлечения данных из ответа
      * @param string $query Тело запроса
+     * @return array
      */
-    public function fetchResponse(string $query);
+    public function fetchResponse(string $query): array;
 }

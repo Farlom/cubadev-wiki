@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Components;
 
 use App\Models\Word;
 use Livewire\Attributes\Validate;
@@ -8,10 +8,17 @@ use Livewire\Component;
 
 class SearchForm extends Component
 {
+    /**
+     * @var string|null Переменная для поиска существующих слов
+     */
     #[Validate('required', message: 'Введите слово для поиска')]
     public ?string $query = '';
 
-    public function search()
+    /**
+     * Метод статей, содержащих слово
+     * @return void
+     */
+    public function search(): void
     {
         $this->dispatch('reset-component')->to(Results::class);
         $this->validate();
@@ -28,6 +35,6 @@ class SearchForm extends Component
 
     public function render()
     {
-        return view('livewire.search-form');
+        return view('livewire.components.search-form');
     }
 }

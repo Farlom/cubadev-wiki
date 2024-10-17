@@ -20,7 +20,7 @@
             @endif
         </div>
         <div class="flex-1">
-        @livewire('content')
+        @livewire('components.content')
         </div>
     </div>
 </div>

@@ -1,21 +1,27 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Components;
 
-use App\Models\Article;
 use App\Models\Word;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
-use Ramsey\Collection\Collection;
 
 class Results extends Component
 {
+    /**
+     * @var Word|null Найденное слово
+     */
     #[Validate('required', message: 'Статьи, содержащие данное слово, не найдены')]
     public ?Word $word = null;
 
+    /**
+     * Вывод списка статей, содержащих слово
+     * @param int|null $id Идентификатор найденного слова
+     * @return void
+     */
     #[On('read-word')]
-    public function setWord(?int $id)
+    public function setWord(?int $id): void
     {
         $this->dispatch('reset-component', $id)->to(Content::class);
         $this->resetValidation();
@@ -28,20 +34,29 @@ class Results extends Component
         $this->validate();
     }
 
+    /**
+     * Сброс данных компонента
+     * @return void
+     */
     #[On('reset-component')]
-    public function resetComponent()
+    public function resetComponent(): void
     {
         $this->word = null;
         $this->dispatch('reset-component')->to(Content::class);
     }
 
-    public function showText(int $id)
+    /**
+     * Триггер события на чтение текста
+     * @param int $id Идентификатор статьи, содержащей слово
+     * @return void
+     */
+    public function showText(int $id): void
     {
         $this->dispatch('show-text', $id)->to(Content::class);
     }
 
     public function render()
     {
-        return view('livewire.results');
+        return view('livewire.components.results');
     }
 }

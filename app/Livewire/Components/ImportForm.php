@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Components;
 
-use App\Livewire\Components\ArticlesTable;
 use App\Models\Article;
 use App\Services\WikiImportService;
 use Livewire\Attributes\Validate;
@@ -10,13 +9,30 @@ use Livewire\Component;
 
 class ImportForm extends Component
 {
+    /**
+     * Переменная для поиска статей
+     * @var string|null
+     */
     #[Validate('required', message: 'Введите название статьи для поиска')]
     public ?string $title;
 
+    /**
+     * Время выполнения запроса
+     * @var float|null
+     */
     public ?float $time;
+
+    /**
+     * Найденная статья
+     * @var Article|null
+     */
     public ?Article $article;
 
-    public function import()
+    /**
+     * Метод для импорта статей в базу
+     * @return void
+     */
+    public function import(): void
     {
         $this->article = null;
         $this->validate();
@@ -41,6 +57,6 @@ class ImportForm extends Component
 
     public function render()
     {
-        return view('livewire.import-form');
+        return view('livewire.components.import-form');
     }
 }

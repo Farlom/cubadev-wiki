@@ -7,10 +7,19 @@ use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
+/**
+ *  Cервис для работы с API ru.wiki
+ */
 class RuWikiService implements ExternalApiInterface
 {
+    /**
+     * @var string URL API сервиса
+     */
     private string $endpoint = 'https://ru.wikipedia.org/w/api.php';
 
+    /**
+     * @var array Параметры запроса
+     */
     private array $params = [
         'action' => 'query',
         'prop' => 'extracts|info',
@@ -38,7 +47,12 @@ class RuWikiService implements ExternalApiInterface
         throw new BadRequestHttpException();
     }
 
-    public function fetchResponse(string $query)
+    /**
+     * @param string $query
+     * @return array
+     * @throws \Exception
+     */
+    public function fetchResponse(string $query): array
     {
         $response = $this->getResponse($query)->json();
 
@@ -64,7 +78,6 @@ class RuWikiService implements ExternalApiInterface
             'text' => $fullText,
             'url' => $pageURL,
         ];
-        return $response;
     }
 
 

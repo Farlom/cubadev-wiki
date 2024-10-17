@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::controller(DashboardController::class)->group(function () {
-    Route::get('/', 'index')->name('index');
+Route::get('/', function () {
+    return view('index');
 });
+

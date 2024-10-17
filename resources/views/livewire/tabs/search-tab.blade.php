@@ -3,8 +3,8 @@
          x-show="show === true"
          x-transition>
 
-        @livewire('search-form')
+        @livewire('components.search-form')
 
-        @livewire('results')
+        @livewire('components.results')
     </div>
 </div>

@@ -7,7 +7,14 @@ use App\Models\Word;
 
 class WikiImportService
 {
+    /**
+     * @var RuWikiService
+     */
     private RuWikiService $ruWikiService;
+
+    /**
+     * @var EnWikiService
+     */
     private EnWikiService $enWikiService;
 
     public function __construct()
@@ -16,7 +23,12 @@ class WikiImportService
         $this->enWikiService = new EnWikiService();
     }
 
-    public function import(string $query)
+    /**
+     * Импорт полученных данных в базу
+     * @param string $query
+     * @return array
+     */
+    public function import(string $query): array
     {
         $errors = [];
         try {
@@ -64,7 +76,12 @@ class WikiImportService
         ];
     }
 
-    private function split(string $text)
+    /**
+     * Разбиение текста на уникальные слова
+     * @param string $text
+     * @return array
+     */
+    private function split(string $text): array
     {
         // убираем символы ударения в словах
         $text = preg_replace('/\x{0301}/u', '', $text);

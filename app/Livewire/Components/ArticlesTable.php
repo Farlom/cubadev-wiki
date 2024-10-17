@@ -9,13 +9,22 @@ use Livewire\Component;
 
 class ArticlesTable extends Component
 {
-    public Collection $articles;
+    /**
+     * Список существующих статей
+     * @var Collection|null
+     */
+    public ?Collection $articles;
 
+    /**
+     * Обработка события добавления новой статьи в базу
+     * @return void
+     */
     #[On('article-created')]
-    public function updateArticlesList()
+    public function updateArticlesList(): void
     {
         $this->articles = Article::orderBy('created_at')->get();
     }
+
     public function mount()
     {
         $this->articles = Article::orderBy('created_at')->get();
