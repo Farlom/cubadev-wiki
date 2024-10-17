@@ -18,7 +18,7 @@
                 @foreach($list as $item)
                     <div wire:ingore.self>
                         <a href="#" wire:click="showText({{ $item->id }})">
-                        {{ $item->title }}
+                            {{ $item->title }}
                         </a>
 
                         (число вхождений: {{ $item->pivot->count }})

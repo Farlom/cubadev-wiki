@@ -2,16 +2,24 @@
 
 namespace App\Livewire;
 
+use App\Models\Article;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Content extends Component
 {
     public $text;
+
     #[On('show-text')]
-    public function setText()
+    public function showText($id)
     {
-        dd(123);
+        $this->text = Article::find($id)->text;
+    }
+
+    #[On('hide-text')]
+    public function hideText()
+    {
+        $this->text = null;
     }
     public function render()
     {
