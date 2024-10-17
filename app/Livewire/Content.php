@@ -8,7 +8,7 @@ use Livewire\Component;
 
 class Content extends Component
 {
-    public $text;
+    public ?string $text = null;
 
     #[On('show-text')]
     public function showText($id)
@@ -16,11 +16,13 @@ class Content extends Component
         $this->text = Article::find($id)->text;
     }
 
-    #[On('hide-text')]
-    public function hideText()
+
+    #[On('reset-component')]
+    public function resetComponent()
     {
         $this->text = null;
     }
+
     public function render()
     {
         return view('livewire.content');

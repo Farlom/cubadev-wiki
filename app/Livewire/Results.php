@@ -17,7 +17,7 @@ class Results extends Component
     #[On('read-word')]
     public function setWord(?int $id)
     {
-        $this->dispatch('hide-text', $id)->to(Content::class);
+        $this->dispatch('reset-component', $id)->to(Content::class);
         $this->resetValidation();
         $this->word = null;
         if ($id)
@@ -26,6 +26,13 @@ class Results extends Component
             return;
         }
         $this->validate();
+    }
+
+    #[On('reset-component')]
+    public function resetComponent()
+    {
+        $this->word = null;
+        $this->dispatch('reset-component')->to(Content::class);
     }
 
     public function showText(int $id)

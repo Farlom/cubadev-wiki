@@ -8,22 +8,18 @@ use Livewire\Component;
 
 class SearchForm extends Component
 {
-    #[Validate([
-        'required',
-    ])]
-    public $query = '';
-    public $text;
+    #[Validate('required', message: 'Введите слово для поиска')]
+    public ?string $query = '';
 
     public function search()
     {
-        $this->dispatch('read-word', null)->to(Results::class);
+        $this->dispatch('reset-component')->to(Results::class);
         $this->validate();
 
         $this->query = mb_strtolower($this->query);
         $word = Word::where('word', $this->query)->first();
 
-        if ($word)
-        {
+        if ($word) {
             $this->dispatch('read-word', $word->id)->to(Results::class);
             return;
         }
