@@ -4,6 +4,8 @@
     <title>
         wiki
     </title>
+    <link rel="icon" href="{{ asset('favicon.ico') }}">
+
     @vite('resources/css/app.css')
 </head>
 <body class="flex flex-col">

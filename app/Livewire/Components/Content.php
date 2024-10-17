@@ -23,6 +23,7 @@ class Content extends Component
     public function showText($id): void
     {
         $this->text = Article::find($id)->text;
+        $this->text = preg_replace('/\n+/', '<br>', $this->text);
     }
 
 
